@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 20%;
+        }
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            background: red;
+        }
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            top: 40px;
+            width: 52px;
+            height: 80px;
+            background: red;
+            border-radius: 50px 50px 0 0;
+        }
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .beat {
+            animation: beat .25s infinite alternate;
+            transform-origin: center center;
+        }
+        @keyframes beat {
+            to { transform: scale(1.1); }
+        }
+        #message {
+            display: none;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="heart" class="heart"></div>
+    <div id="message">Will you be my Valentine?</div>
+
+    <script>
+        document.getElementById('heart').addEventListener('click', function() {
+            this.classList.add('beat');
+            document.getElementById('message').style.display = 'block';
+            setTimeout(() => this.classList.remove('beat'), 500);
+        });
+    </script>
+</body>
+</html>
